@@ -2,10 +2,12 @@ package page;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import utils.Waiter;
 
 public class LoginPage extends Page {
 
     @FindBy(xpath = "//input[@id='user-name']")
+    // более эффективный способ инициализации, но не подходит для динамических локаторов
     private WebElement usernameField;
 
     @FindBy(xpath = "//input[@id='password']")
@@ -20,16 +22,18 @@ public class LoginPage extends Page {
     }
 
     public LoginPage fillInUserName(String userName) {
-        usernameField.sendKeys(userName);
+        Waiter.waitElementToBeVisible(usernameField).sendKeys(userName);    //пример ожидания
         return this;
     }
 
     public LoginPage fillInPassword(String password) {
-        passwordField.sendKeys(password);
+        Waiter.waitElementToBeVisible(passwordField).sendKeys(password); //пример ожидания
         return this;
     }
 
-    public void clickLoginButton() {
-        loginButton.click();
+    public LoginPage clickLoginButton() {
+        Waiter.waitElementToBeClickable(loginButton).click(); //пример ожидания
+        return this;
     }
+
 }

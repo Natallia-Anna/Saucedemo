@@ -1,4 +1,4 @@
-package tests;
+package test;
 
 import model.User;
 import org.testng.Assert;
@@ -9,13 +9,10 @@ import service.LoginPageService;
 
 public class LoginPageTest extends BaseTest {
 
-    private LoginPageService loginPageService;
-    private User user;
-
     @BeforeClass
     public void setUp() {
         loginPageService = new LoginPageService();
-        user = new User();
+        user = new User(); //можно инициализировать и в тестовом методе
     }
 
     @Test
@@ -23,7 +20,8 @@ public class LoginPageTest extends BaseTest {
         InventoryPageService inventoryPageService = loginPageService.login(user);
         String actualTextOfMainPageSection = inventoryPageService.getActualNameOfMainPageSection();
         String expectedTextOfMainPageSection = "Products";
-        Assert.assertEquals(actualTextOfMainPageSection, expectedTextOfMainPageSection, "Login "
-                + "failed! The actual text of the page doesn't match expected");
+        Assert.assertEquals(actualTextOfMainPageSection, expectedTextOfMainPageSection, "Login failed!" +
+                " Actual name doesn't match expected");
+
     }
 }

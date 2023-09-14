@@ -1,12 +1,15 @@
 package driver;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import java.time.Duration;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.opera.OperaDriver;
+
+import java.time.Duration;
+
+import static utils.Waiter.WAIT_2_SECONDS;
 
 public class WebDriverFactory {
 
@@ -21,12 +24,12 @@ public class WebDriverFactory {
                 driver = new FirefoxDriver();
                 break;
             }
-            case "opera": {
-                WebDriverManager.operadriver().setup();
-                driver = new OperaDriver();
+            case "edge": {
+                WebDriverManager.edgedriver();
+                driver = new EdgeDriver();
                 break;
             }
-            default:{
+            default: {
                 WebDriverManager.chromedriver().setup();
                 ChromeOptions chromeOptions = new ChromeOptions();
                 chromeOptions.addArguments("--incognito");
@@ -35,7 +38,8 @@ public class WebDriverFactory {
             }
         }
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(WAIT_2_SECONDS)); //будет ожидать элемент макс 2 секи
         return driver;
     }
+
 }
