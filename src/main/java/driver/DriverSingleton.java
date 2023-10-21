@@ -9,7 +9,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.time.Duration;
 
-//singletone - pattern класса для создания только одного! экземпляра драйвера
+//singleton - pattern класса для создания только одного! экземпляра драйвера
 //(=private конструктор, private переменная, только геттер, нет сеттера (чтобы нельзя было создать, изменить экземпляр), метод статический)
 
 public class DriverSingleton {
