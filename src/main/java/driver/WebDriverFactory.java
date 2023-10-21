@@ -1,6 +1,7 @@
 package driver;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.apache.commons.logging.Log;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -30,11 +31,16 @@ public class WebDriverFactory {
                 break;
             }
             default: {
-                WebDriverManager.chromedriver().setup();
-                ChromeOptions chromeOptions = new ChromeOptions();
-                chromeOptions.addArguments("--incognito");
-                chromeOptions.addArguments("--remote-allow-origins=*");
-                driver = new ChromeDriver(chromeOptions);
+                try {
+                    WebDriverManager.chromedriver().setup();
+                    ChromeOptions chromeOptions = new ChromeOptions();
+                    chromeOptions.addArguments("--incognito");
+                    chromeOptions.addArguments("--remote-allow-origins=*");
+                    driver = new ChromeDriver(chromeOptions);
+                } catch (Exception e) {
+                    Log log = null;
+                    log.fatal("Driver did not start!");
+                }
             }
         }
         driver.manage().window().maximize();

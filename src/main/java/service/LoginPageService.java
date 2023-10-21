@@ -10,6 +10,7 @@ public class LoginPageService {
     private LoginPage loginPage = new LoginPage();   // + неявно super конструктор из Page, который проинициализирует все эелементы;
 
     public InventoryPageService login(User user){
+        loginPage.openPage(LOGIN_PAGE_URL);
         loginPage.openPage(LOGIN_PAGE_URL)
                 .fillInUserName(user.getName())
                 .fillInPassword(user.getPassword())
